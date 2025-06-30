@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
   const [data, setData] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+  
   function onSelectionChange(item) {
     if (Array.isArray(item)) {
       setData((prev) => [...prev, ...selectedOptions].sort((a, b) => a.region.localeCompare(b.region)));
@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     const getTimezone = async () => {
       try {
-        const response = await fetch("https://timeapi.io/api/timezone/availabletimezones");
+        const response = await fetch("http://109.67.155.6:8091/api/Timezones");
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -46,7 +46,13 @@ function App() {
 
   return (
     <>
-      <div className="card">
+      <div className="card gap-25 flex flex-col">
+        <Multiselect
+          options={data}
+          selectedOptions={selectedOptions}
+          onSelectionChange={onSelectionChange}
+          placeholder="Test"
+        />
         <Multiselect
           options={data}
           selectedOptions={selectedOptions}
